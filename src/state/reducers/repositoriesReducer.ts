@@ -1,16 +1,25 @@
+import { ActionTypes } from "../action-types";
+import { Action } from "../actions";
+
 interface RepositoriesState {
   loading: boolean;
   error: string | null;
   data: string[];
 }
 
-const reducer = (state: RepositoriesState, action: any) => {
+const initialState: RepositoriesState = {
+  loading: false,
+  error: null,
+  data: [],
+};
+
+const reducer = (state: RepositoriesState = initialState, action: Action): RepositoriesState => {
   switch (action.type) {
-    case 'search_repositories':
+    case ActionTypes.SEARCH_REPOSITIRIES:
       return { loading: true, error: null, data: [] };
-    case 'search_repositories_success':
+    case ActionTypes.SEARCH_REPOSITIRIES_SUCCESS:
       return { loading: false, error: null, data: action.payload };
-    case 'search_repositories_error':
+    case ActionTypes.SEARCH_REPOSITIRIES_ERROR:
       return { loading: false, error: action.payload, data: [] };
     default:
       return state;
